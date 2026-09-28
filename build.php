@@ -24,8 +24,11 @@ foreach ($it as $file) {
     $target = $dist . '/' . $rel;
     @mkdir(dirname($target), 0777, true);
     if ($file->getExtension() === 'php') {
+        $uri = '/' . str_replace('\\', '/', preg_replace('/index\.php$/', '', $rel));
+        putenv('REQUEST_URI=' . $uri);
         $html = shell_exec($php . ' ' . escapeshellarg($file->getPathname()));
         if ($html === null || $html === '') { fwrite(STDERR, "Falha ao gerar $rel\n"); exit(1); }
+        if (preg_match('/(Warning|Deprecated|Notice|Fatal error)\b.*? in /', $html)) { fwrite(STDERR, "Erro PHP em $rel\n"); exit(1); }
         file_put_contents(preg_replace('/\.php$/', '.html', $target), $html);
         echo "gerado  $rel\n";
     } else {

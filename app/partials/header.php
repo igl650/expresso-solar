@@ -3,7 +3,7 @@ require_once APP_PATH . '/helpers.php';
 $title_suffix = ' — Expresso Solar';
 $final_title = isset($page_title) ? $page_title . $title_suffix : 'Expresso Solar' . $title_suffix;
 $final_desc = isset($page_description) ? $page_description : 'Projetos de energia solar dimensionados para o seu consumo em Juazeiro, Petrolina e região.';
-$current_url = base_url(parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH));
+$current_url = base_url(parse_url($_SERVER['REQUEST_URI'] ?? (getenv('REQUEST_URI') ?: '/'), PHP_URL_PATH));
 $og_image = asset_url('img/instalacao-instagram-2026.jpg');
 ?>
 <!DOCTYPE html>
@@ -54,7 +54,7 @@ $og_image = asset_url('img/instalacao-instagram-2026.jpg');
                 </a>
                 
                 <?php
-                $current_path = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
+                $current_path = parse_url($_SERVER['REQUEST_URI'] ?? (getenv('REQUEST_URI') ?: '/'), PHP_URL_PATH);
                 $is_active = function($path) use ($current_path) {
                     return strpos($current_path, $path) !== false ? 'active' : '';
                 };
