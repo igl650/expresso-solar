@@ -1,0 +1,8 @@
+User-agent: *
+Disallow: /
+
+# Ambiente de demonstração
+# Ao aprovar o domínio final, alterar para:
+# User-agent: *
+# Allow: /
+# Sitemap: https://www.dominio.com.br/sitemap.xml
